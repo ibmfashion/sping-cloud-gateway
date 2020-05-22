@@ -1,0 +1,20 @@
+server:
+  port: 9000
+spring:
+  application:
+    name: api-gateway # 应用名
+  cloud:
+    gateway:
+      # 路由si(集合)
+      routes:
+        # id唯一标识，(可自定义)
+        - id: 1
+          # 路由服务地址
+          uri: https://gitee.com/
+          # 路由拦截地址(断言)
+          predicates:
+            - Path=/GN
+        - id: 2
+          uri: https://github.com/sunweisheng
+          predicates:
+            - Path=/GW
