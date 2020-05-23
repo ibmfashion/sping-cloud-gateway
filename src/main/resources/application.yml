@@ -18,3 +18,16 @@ spring:
           uri: https://github.com/sunweisheng
           predicates:
             - Path=/GW
+        - id: host_route
+          uri: http://httpbin.org:80/get
+          predicates:
+            - Host=**.csdn.** # 请求域名携带csdn的,则转发
+        - id: query_route
+          uri: http://163.com
+          predicates:
+            - Query=username, zzz* # 请求参数含有username,且值满足zzz开头的,则转发(对值的匹配可以省略)
+        - id: header_route
+          uri: http://httpbin.org:80/get
+          predicates:
+            - Header=request, \d+ # 如果请求头含有request,且为数字,则转发
+
