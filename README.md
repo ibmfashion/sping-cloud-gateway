@@ -47,3 +47,26 @@ NB: JAVA_HOME should point to a JDK not a JRE.
 
 4 maven  操作
 https://my.oschina.net/mzdbxqh/blog/849040
+
+5 pom.xml
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-starter-data-mongodb</artifactId>-->
+<!--        </dependency>-->
+
+<!--        <dependency>-->
+<!--            <groupId>org.mybatis.spring.boot</groupId>-->
+<!--            <artifactId>mybatis-spring-boot-starter</artifactId>-->
+<!--            <version>2.1.2</version>-->
+<!--        </dependency>-->
+
+5 Error creating bean with name 'org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfigurati
+原因：
+这是因为spring boot 会默认加载org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration这个类，
+
+DataSourceAutoConfiguration类使用了@Configuration注解向spring注入了dataSource bean。因为工程中没有关于dataSource相关的配置信息，当spring创建dataSource bean因缺少相关的信息就会报错。
+
+解决办法：
+
+在启动类上加注解：
+@EnableAutoConfiguration(exclude={DataSourceAutoConfiguration.class})
